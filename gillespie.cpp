@@ -10,14 +10,13 @@
 #include "setup.cpp"
 
 int main(){
-
 	std::vector<double> arn_means,pr_means;
 	std::vector<double> t_means;
 	arn_means.push_back(0);
 	pr_means.push_back(0);
 	t_means.push_back(0.0);
 
-	// each of this arrays will contain the result of an individual cell
+	// each of this array will contain the result of an individual cells
 	std::array<int,n_cells> arn_local,pr_local;
 	// initialized in ceros...
 	std::fill(arn_local.begin(),arn_local.end(),0);
@@ -26,8 +25,6 @@ int main(){
 
 
 	while(t_means.back()<tmax){
-
-
 		for(int i=0; i<n_cells; i++){
 			gillespie::delta(&arn_local[i],&pr_local[i],dt);
 		}
