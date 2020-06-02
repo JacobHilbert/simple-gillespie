@@ -1,9 +1,11 @@
 # simple-gillespie
-Gillespie algorithm implementing the ARN-Protein model for multiple cells.
+Gillespie algorithm implementing the single ARN-Protein model for multiple cells.
 
 <img src="examples/graph.png" width="500">
 
 The code calculates the evolution of several cells and averages its values every so often. The results are then stored in a `.dat` file per variable.
+
+Currently, the code runs in parallel with OpenMP macros.
 
 ### To run:
 
