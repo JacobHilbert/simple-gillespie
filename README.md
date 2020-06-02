@@ -20,7 +20,7 @@ The constants of the model are defined on the [setup file](setup.cpp) as:
 | name 	| meaning | default value |
 | --- | --- | --- |
 | tmax | run until time reaches this value | 200 |
-| `dt` | Saves averages every `dt` time units | 10 |
+| `dt` | Saves averages every `dt` time units | 2 |
 | `cr` | average ARN creations per time unit | 1 |
 | `dr` | average ARN destructions per time unit per ARN units | 0.2 |
 | `cp` | average protein creations per ARN unit | 50 |

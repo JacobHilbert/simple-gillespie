@@ -1,7 +1,7 @@
 // constants. c stands for creation, d for destruction, r for arn, p for protein
 const double
 	tmax = 200.0,
-	dt = 10.0, // time step on the averages
+	dt = 2.0, // time step on the averages
 	cr = 1.0,
 	dr = 0.2,
 	cp = 50,
