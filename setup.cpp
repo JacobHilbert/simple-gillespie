@@ -1,12 +1,12 @@
 // constants. c stands for creation, d for destruction, r for arn, p for protein
 const double
 	tmax = 200.0,
-	dt = 2.0, // time step on the averages
+	dt = 10.0, // time step on the averages
 	cr = 1.0,
 	dr = 0.2,
 	cp = 50,
 	dp = 0.03333333;
-const int n_cells = 2000;
+const int n_cells = 5000;
 
 std::random_device random_device; // collects a seed from a random device
 std::mt19937 mersenne_engine {random_device()}; // Mersenne Twister

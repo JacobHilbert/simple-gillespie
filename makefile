@@ -4,7 +4,7 @@ graph.pdf: graph.py arn.dat pr.dat
 
 arn.dat pr.dat: gillespie.out gillespie.cpp
 	@echo "Running"
-	@time ./gillespie.out
+	@./gillespie.out
 
 gillespie.out: gillespie.cpp
 	@echo "Compiling"
