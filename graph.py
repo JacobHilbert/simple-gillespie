@@ -8,5 +8,5 @@ fig,ax = plt.subplots(len(sys.argv)-1)
 for i,fname in enumerate(sys.argv[1:]):
 	ax[i].plot(*(np.genfromtxt(fname).T),c='k')
 	ax[i].set_title(fname[:-4])
-plt.savefig("graph.pdf")
-plt.show()
+plt.savefig("graph.pdf");
+#plt.show()

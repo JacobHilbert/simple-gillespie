@@ -1,6 +1,5 @@
 #include <iostream> // print things, cout
 #include <fstream> // save to files, ofstream
-#include <vector>
 #include <array>
 #include <random>
 #include <string> // unused for now, stoi
@@ -10,39 +9,40 @@
 #include "setup.cpp"
 
 int main(){
-	std::vector<double> arn_means,pr_means;
-	std::vector<double> t_means;
-	arn_means.push_back(0);
-	pr_means.push_back(0);
-	t_means.push_back(0.0);
+	const int time_size = (int)(tmax/dt)+1;
+	std::array<double,time_size> t_means,arn_means,pr_means;
+	arn_means[0] = 0.0;
+	pr_means[0] = 0.0;
+
+	std::iota(t_means.begin(),t_means.end(),0.0);
+	std::transform(t_means.begin(),t_means.end(),t_means.begin(),[=](double d){return d*dt;});
 
 	// each of this array will contain the result of an individual cells
 	std::array<int,n_cells> arn_local,pr_local;
-	// initialized in ceros...
+	// initialized in zeros...
 	std::fill(arn_local.begin(),arn_local.end(),0);
 	std::fill(pr_local.begin(),pr_local.end(),0);
 	int r,p;
 
 
-	while(t_means.back()<tmax){
-		for(int i=0; i<n_cells; i++){
-			gillespie::delta(&arn_local[i],&pr_local[i],dt);
+	for(int i=1; i<time_size; i++){
+		for(int j=0; j<n_cells; j++){
+			gillespie::delta(&arn_local[j],&pr_local[j],dt);
 		}
-		pr_means.push_back(mean(pr_local.begin(),pr_local.end(),pr_local.size()) );
-		arn_means.push_back(mean(arn_local.begin(),arn_local.end(),arn_local.size()) );
-		t_means.push_back(t_means.back()+dt);
-		std::cout << "\r" << (int)t_means.back() << "/" << (int)tmax << std::flush;
+		pr_means[i] = mean(pr_local.begin(),pr_local.end(),time_size);
+		arn_means[i] = mean(arn_local.begin(),arn_local.end(),time_size);
+		std::cout << "\r" << (int)t_means[i] << "/" << (int)tmax << std::flush;
 	}
 
 	std::ofstream output_arn("arn.dat");
-	for(int i=0; i<arn_means.size(); i++){
+	for(int i=0; i<time_size; i++){
 		output_arn << t_means[i] << "\t" << arn_means[i] << "\n";
 	}
 
 	std::ofstream output_pr("pr.dat");
-	for(int i=0; i<arn_means.size(); i++){
+	for(int i=0; i<time_size; i++){
 		output_pr << t_means[i] << "\t" << pr_means[i] << "\n";
 	}
-	std::cout << "Fnished" << std::endl;
+	std::cout << "\nFnished" << std::endl;
 	return 0;
 }

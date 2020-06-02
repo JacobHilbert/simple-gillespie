@@ -13,4 +13,5 @@ gillespie.out: gillespie.cpp
 clean:
 	@rm -f *.dat
 	@rm -f *.out
+	@rm -f *.pdf
 	@clear
