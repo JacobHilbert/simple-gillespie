@@ -1,6 +1,8 @@
 # simple-gillespie
 Gillespie algorithm implementing the ARN-Protein model for multiple cells. 
 
+<img src="examples/graph.png" width="500">
+
 The code calculates the evolution of several cells and averages its values every so often. The results are then stored in a `.dat` file per variable.
 
 ### To run:
@@ -19,8 +21,8 @@ The constants of the model are defined on the [setup file](setup.cpp) as:
 | `dt` | Saves averages every `dt` time units | 2 |
 | `cr` | average ARN creations per time unit | 1 | 
 | `dr` | average ARN destructions per time unit per ARN units | 0.2 |
-| `cp` | average protein creations per ARN unit | 50 |
-| `dp` | average protein destructions per protein unit | 0.03333 |
+| `cp` | average protein creations per time unit per ARN unit | 50 |
+| `dp` | average protein destructions per time unit per protein unit | 0.03333 |
 | `n_cells` | Number of cells to simulate | 1000 |
 
 "Units" are completely arbitrary.
