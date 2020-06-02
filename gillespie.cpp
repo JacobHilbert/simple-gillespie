@@ -26,11 +26,15 @@ int main(){
 
 
 	for(int i=1; i<time_size; i++){
-		for(int j=0; j<n_cells; j++){
-			gillespie::delta(&arn_local[j],&pr_local[j],dt);
+		#pragma omp parallel
+		{
+			#pragma omp for 
+			for(int j=0; j<n_cells; j++){
+				gillespie::delta(&arn_local[j],&pr_local[j],dt);
+			}
 		}
-		pr_means[i] = mean(pr_local.begin(),pr_local.end(),time_size);
-		arn_means[i] = mean(arn_local.begin(),arn_local.end(),time_size);
+		pr_means[i] = mean(pr_local.begin(),pr_local.end(),n_cells);
+		arn_means[i] = mean(arn_local.begin(),arn_local.end(),n_cells);
 		std::cout << "\r" << (int)t_means[i] << "/" << (int)tmax << std::flush;
 	}
 
